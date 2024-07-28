@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>6551.AI</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+        <link rel="icon" href="favicon.png" type="image/png">
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body class="min-h-screen py-12">
+        <div class="container px-4">
+            <header class="text-center mb-16">
+                <h1 class="gradient-bg" data-text="65551.AI">
+                    <span>6</span><span>5</span><span>5</span><span>1</span><span class="dot">.</span><span>A</span><span>I</span>
+                </h1>
+                <p class="text-xl mb-8">TURN EACH ONE OF YOUR NFTs INTO A WALLET, CONTROL IT WITH AI</p>
+                <button id="connectWallet" class="btn connectwallet text-2xl px-8 py-4 ">CONNECT WALLET</button>
+            </header>
+
+            <p id="status" class="text-center text-2xl mb-12 pop-text"></p>
+
+            <div class="grid gap-12 md:grid-cols-2">
+                <section id="wallet-info" class="card p-8">
+                    <h2 class="text-4xl pop-text mb-8">WALLET INFO</h2>
+                    <p class="mb-6">Select an NFT you own to activate its ERC6551 wallet.</p>
+                    <div class="space-y-6">
+                        <div id="nftImageContainer" class="mt-4" style="display: none"></div>
+                        <select id="nftSelect" class="input-field text-lg">
+                            <option value="">Connect your wallet to select an NFT</option>
+                        </select>
+                        <button id="createERC6551Wallet" class="btn btn-secondary w-full text-xl">ACTIVATE ERC6551</button>
+                    </div>
+                    <div id="walletInfo" class="mt-8">
+                        <h3 class="text-2xl pop-text mb-4">ERC6551 WALLET</h3>
+                        <p>Address: <span id="walletAddress" class="font-bold"></span></p>
+                        <p>Owner: <span id="walletOwner" class="font-bold"></span></p>
+                        <p>Balance: <span id="walletBalance" class="font-bold"></span> MATIC</p>
+                        <div class="mt-8 space-y-6">
+                            <h3 class="text-2xl pop-text mb-4">MANUAL TRANSACTIONS</h3>
+                            <input type="text" id="transferTo" placeholder="Address to transfer to" class="input-field">
+                            <input type="number" id="transferAmount" placeholder="Amount to transfer" class="input-field">
+                            <button id="transferButton" class="btn btn-primary w-full text-xl">TRANSFER</button>
+                        </div>
+                        <div class="mt-8 space-y-6">
+                            <input type="text" id="callTo" placeholder="Contract to call" class="input-field">
+                            <input type="text" id="callData" placeholder="Call data (hex)" class="input-field">
+                            <button id="executeButton" class="btn btn-secondary w-full text-xl">EXECUTE CALL</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="brianInterface" class="card p-8">
+                    <h2 class="text-4xl pop-text mb-8">AI TRANSACTIONS</h2>
+                    <div id="chat-container" class="mb-6">
+                        <p id="message" class="text-center items-center justify-center"></p>
+                        <div id="chat-background" class="flex items-center justify-center h-full">
+                            <div class="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                </svg>
+                                <p class="text-2xl pop-text  text-gray-500">DESCRIBE YOUR TRANSACTION</p>
+                                <p class="mt-2  text-gray-500">Example: Send 1 MATIC to Vitalik.ETH</p>
+                            </div>
+                        </div>
+                        <div id="ai-response">
+                            <div id="transactionSuggestions" class="mt-8 space-y-6" style="display: none">
+                                <!-- Transaction suggestions will be dynamically inserted here -->
+                            </div>
+                            <div id="transactionSuggestion" class="mt-8">
+                          
+                                <pre id="transactionDetails" class="bg-white border-3 border-black p-4 mt-2 overflow-x-auto"></pre>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <input type="text" id="promptInput" placeholder="What would you like to do?" class="input-field flex-grow text-lg">
+                        <button id="submitPrompt" class="btn btn-primary px-6 text-xl">ASK</button>
+                    </div>
+                  
+                </section>
+            </div>
+            <footer class="text-center mt-16">
+                <p class="text-xl mt-8 mb-4">© HaAI Labs 2024</p>
+                <div style="text-align: center; font-size: small; margin-top: 10px;">
+                  <a href="https://polygonscan.com/address/0xf4DCf17d5F681d477723f00863821E837aE51EF9" target="_blank">ERC6551 Registry ↗</a>
+                  &nbsp;|&nbsp;
+                  <a href="https://polygonscan.com/address/0x46C24A47Cd80Ef61Dde6ac6961ce05F366Cc3E8B" target="_blank">ERC6551 Account ↗</a>
+                </div>
+            </footer>
+        </div>
+        
+        <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
